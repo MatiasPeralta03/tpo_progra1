@@ -57,7 +57,7 @@ ordenada = sorted(numeros)
 print(ordenada)# [1, 4, 5, 6, 7, 8, 9]
 
 #Random
-random.random(): # Devuelve un número realal azar dentro del intervalo [0, 1)
+#random.random(): # Devuelve un número realal azar dentro del intervalo [0, 1)
 
 #random.randint(<min>, <max>)
 
