@@ -29,10 +29,8 @@ def producto_lista(lst):
     return aux
 
 def eliminar_num_en_lista(lst,num):
-
     while num in lst:
         lst.remove(num)
-
     return lst
 
 def lista_capicua(lst):
