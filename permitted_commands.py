@@ -68,3 +68,108 @@ lista = [3, 4, 5, 6]
 random.shuffle(lista)
 print(lista) # por ejemplo [6, 4, 5, 3]
 
+sublista_invertida = lista[::-1]
+
+lista[2:2] = [3,2]
+print(lista) #Inserta 3,2 en la posicion 2
+
+[2,3] > [1,4] #True
+[2,3] > [2,4] #False
+[2,4,6] > [1,4] #True
+
+id(lista) #Indica el lugar en memoria
+
+#Copiar listas en varios metodos
+lista1 = [1,2,3]
+lista2 = lista1[:]
+lista2.append(4)
+
+lista1 = [1,2,3]
+lista2 = list(lista1)
+lista2.append(4)
+
+lista1 = [1,2,3]
+lista2 = lista1 + []
+lista2.append(4)
+
+lista1 = [1,2,3]
+lista2 = lista1.copy()
+lista2.append(4)
+
+#For
+for value in lista1:
+    print(value) # 1 2 3
+
+for value in lista1[0:2]:
+    print(value) # 1 2
+
+#Enumerate()
+#for i, letra in enumerate(lista):
+
+numeros = [1,2,3,4]
+lista_raices = list(map(lambda x:x**(1/2),numeros))
+print(lista_raices) # 1.0, 1.4142135623730951, 1.7320508075688772, 2.0
+
+#Filter acepta funciones True or False
+lista_raices = list(filter(lambda x:x%2!=0,numeros))
+print(lista_raices) #Solo valores impares
+
+#Map devuelve una lista del mismo largo que la original pero con valores modificados
+#Filter devuelve una lista con el mismo largo o mas corta pero con valores originales
+
+#Conjuntos por extension
+#Dias de la semana: Se debe definir cada valor o posibilidades dentro del conjunto
+
+#Conjuntos por comprension
+#X tal que X
+
+cuadrados = [x**2 for x in range(6)] 
+
+cubospares = [i**3 for i in range(11) if i**3 % 2 == 0] #Cubos pares desde el 0 hasta el 5to
+
+#Creacion de matrices estatica. Cuando ya sabemos cuantas filas y columnas vamos a usar
+matriz = [[0,0,0,0],
+          [0,0,0,0],
+          [0,0,0,0]]
+
+#Creacion de matrices dinamica
+#Alternativa A
+filas = 3
+columnas = 4
+matriz = []
+for f in range(filas):
+    fila = []
+    for c in range(columnas):
+        fila.append(0)
+    matriz.append(fila)
+
+#Alternativa B
+filas = 3
+columnas = 4
+matriz = []
+for f in range(filas):
+    matriz.append([0] * columnas)
+
+#Alternativa C
+filas = 3
+columnas = 4
+matriz = [[0] * columnas for i in range(filas)]
+
+#Alternativa D
+filas = 3
+columnas = 4
+matriz = [[0 for c in range(columnas)] for f in range(filas)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
