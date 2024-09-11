@@ -1,46 +1,51 @@
+''' En este programa se busca analizar las ventas totales de productos de un distribuidor de tecnología. 
+    Para esto se generó una matriz con los 100 productos comercializados en el mes. También generamos 
+    2 listas "maestras" de categorias y marcas. Estos dos campos corresponden al índice '''
+
 #Lista de Categorias
 
-categories = [
-    "Tecnología", #0
-    "Electrodomésticos", #1
-    "Supermercado", #2
-    "Juegos y Juguetes" #3
+categorias = [
+    [1,"Tecnología"],
+    [2,"Electrodomésticos"],
+    [3,"Supermercado"],
+    [4,"Juegos y Juguetes"]
 ]
 
 #Lista de Marcas
 
 marcas= [
-    "Samsung", 
-    "EcoBrand", 
-    "Electra",
-    "MarcaY",
-    "NovaTech",
-    "LG",
-    "TechPro",
-    "MarcaX",
-    "Drean",
-    "Lenovo",
-    "PrimeCo",
-    "Whirpool",
-    "Hormiga Negra",
-    "Ruttini",
-    "Adata",
-    "Salenstein",
-    "Motorola",
-    "Origen",
-    "La falda",
-    "Perro viejo",
-    "Brandin",
-    "Hitachi",
-    "BGH",
-    "WU"
+    [1,"Samsung"], 
+    [2,"EcoBrand"], 
+    [3,"Electra"],
+    [4,"MarcaY"],
+    [5,"NovaTech"],
+    [6,"LG"],
+    [7,"TechPro"],
+    [8,"MarcaX"],
+    [9,"Drean"],
+    [10,"Lenovo"],
+    [11,"PrimeCo"],
+    [12,"Whirpool"],
+    [13,"Hormiga Negra"],
+    [14,"Ruttini"],
+    [15,"Adata"],
+    [16,"Salenstein"],
+    [17,"Motorola"],
+    [18,"Origen"],
+    [19,"La falda"],
+    [20,"Perro viejo"],
+    [21,"Brandin"],
+    [22,"Hitachi"],
+    [23,"BGH"],
+    [24,"WU"]
 ]
 
-#Matriz de productos Nx5, siendo N la cantidad de filas
+''' Matriz de productos Nx5, siendo N la cantidad de filas.
+    Los campos son id,nombre,marca,precio_unitario,cantidad,categoria '''
 
 productos=[
-    [1,"Tableta",0,347610,72,0],
-    [2,"Lavadora",0,618650,96,1],
+    [1,"Tableta",3,347610,72,0],
+    [2,"Lavadora",5,618650,96,1],
     [3,"Router",1,73760,1,0],
     [4,"Cafetera",2,93530,45,1],
     [5,"Cerveza",3,3500,29,1],
@@ -71,8 +76,8 @@ productos=[
     [30,"Computadora portátil",10,65730,81,0],
     [31,"Acondicionador de aire",8,1398100,62,0],
     [32,"Refrigerador",4,20180,67,1],
-    [33,"Vino",12,98600,10,2],
-    [34,"Impresora",14,228660,18,0],
+    [33,"Vino",13,98600,10,2],
+    [34,"Impresora",14,228660,17,0],
     [35,"Acondicionador de aire",5,1278600,60,1],
     [36,"Teléfono inteligente",10,2700590,54,0],
     [37,"Impresora",1,44100,55,0],
@@ -83,15 +88,15 @@ productos=[
     [42,"Cámara",7,6718610,94,0],
     [43,"Teclado",1,220930,66,0],
     [44,"Cafetera",14,237830,30,1],
-    [45,"Acondicionador de aire",0,1863000,41,0],
-    [46,"Vino",15,22140,81,2],
+    [45,"Acondicionador de aire",1,1863000,41,0],
+    [46,"Vino",16,22140,81,2],
     [47,"Teléfono inteligente",14,2100910,46,0],
     [48,"Aspiradora",10,26480,81,0],
     [49,"Cámara web",14,45160,22,0],
     [50,"Aspiradora",2,88870,7,1],
-    [51,"Dinosaurio",1,62900,30,3],
+    [51,"Dinosaurio",4,62900,30,3],
     [52,"Aspiradora",6,46540,95,1],
-    [53,"Auto de juguete",1,98820,85,3]
+    [53,"Auto de juguete",4,98820,85,3]
     [54,"Teléfono inteligente",2,1500090,70,0],
     [55,"Impresora",4,26390,58,0],
     [56,"Dinosaurio",10,97330,44,3],
@@ -101,22 +106,22 @@ productos=[
     [60,"Cámara",7,5289620,77,0],
     [61,"Monitor",10,28320,30,0],
     [62,"Computadora portátil",1,1570930,53,0],
-    [63,"Vino",17,81430,19,2],
+    [63,"Vino",18,81430,19,2],
     [64,"Reloj inteligente",14,541200,31,0],
     [65,"Refrigerador",3,80460,91,0],
     [66,"Auto de juguete",6,89480,40,3]
     [67,"Auriculares",4,22610,88,0],
-    [68,"Tableta",18,382660,32,0],
+    [68,"Tableta",17,382660,32,0],
     [69,"Vino",19,48780,10,2],
     [70,"Cámara",1,94700,98,0],
     [71,"Impresora",2,97160,74,0],
     [72,"Computadora portátil",7,88200,54,0],
-    [73,"Vino",18,65920,94,2],
+    [73,"Vino",20,65920,94,2],
     [74,"Impresora",7,3130,36,0],
     [75,"Cámara web",3,151700,14,0],
     [76,"Cámara web",1,60290,95,0],
     [77,"Monitor",1,25530,98,0],
-    [78,"Vino",13,46970,17,2],
+    [78,"Vino",14,46970,17,2],
     [79,"Monitor",22,74920,87,0],
     [80,"Impresora",2,20140,24,0],
     [81,"Ratón",2,81770,65,0],
@@ -141,4 +146,4 @@ productos=[
     [100,"Acondicionador de aire",24,941390,15,1]
 ]
 
-
+print()
