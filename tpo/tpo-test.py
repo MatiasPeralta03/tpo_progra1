@@ -1,58 +1,144 @@
-import csv
-import json
-import os
+#Lista de Categorias
 
-class SalesDataPlatform:
-    def __init__(self):
-        self.sales_data = []
+categories = [
+    "Tecnología", #0
+    "Electrodomésticos", #1
+    "Supermercado", #2
+    "Juegos y Juguetes" #3
+]
 
-    def load_csv(self, filepath):
-        try:
-            with open(filepath, mode='r') as file:
-                reader = csv.DictReader(file)
-                self.sales_data.extend([row for row in reader])
-        except Exception as e:
-            print(f"Error loading CSV file: {e}")
+#Lista de Marcas
 
-    def load_json(self, filepath):
-        try:
-            with open(filepath, mode='r') as file:
-                data = json.load(file)
-                self.sales_data.extend(data if isinstance(data, list) else [data])
-        except Exception as e:
-            print(f"Error loading JSON file: {e}")
+marcas= [
+    "Samsung", 
+    "EcoBrand", 
+    "Electra",
+    "MarcaY",
+    "NovaTech",
+    "LG",
+    "TechPro",
+    "MarcaX",
+    "Drean",
+    "Lenovo",
+    "PrimeCo",
+    "Whirpool",
+    "Hormiga Negra",
+    "Ruttini",
+    "Adata",
+    "Salenstein",
+    "Motorola",
+    "Origen",
+    "La falda",
+    "Perro viejo",
+    "Brandin",
+    "Hitachi",
+    "BGH",
+    "WU"
+]
 
-    def analyze_sales(self):
-        # Implement your analysis using lists, dictionaries, etc.
-        total_sales = sum(float(record.get('sales_amount', 0)) for record in self.sales_data)
-        print(f"Total Sales: {total_sales}")
-        # Add more complex analysis here
+#Matriz de productos Nx5, siendo N la cantidad de filas
 
-    def recursive_calculation(self, data, depth=0):
-        # Example of a recursive calculation
-        if depth == len(data):
-            return 0
-        return float(data[depth].get('sales_amount', 0)) + self.recursive_calculation(data, depth + 1)
+productos=[
+    [1,"Tableta",0,347610,72,0],
+    [2,"Lavadora",0,618650,96,1],
+    [3,"Router",1,73760,1,0],
+    [4,"Cafetera",2,93530,45,1],
+    [5,"Cerveza",3,3500,29,1],
+    [6,"Cámara",4,760310,14,0],
+    [7,"Tableta",5,479000,40,0],
+    [8,"Teclado",6,56840,2,0],
+    [9,"Monitor",2,44000,82,0],
+    [10,"Microonda",3,2860,22,1],
+    [11,"Refrigerador",7,929780,82,1],
+    [12,"Ratón",1,65030,85,0],
+    [13,"Lavadora",5,827970,11,1],
+    [14,"Cámara",4,2038760,10,0],
+    [15,"Router",6,86540,43,0],
+    [16,"Aspiradora",4,16980,73,1],
+    [17,"Microonda",2,112780,82,1],
+    [18,"Cámara web",1,65400,2,0],
+    [19,"Dinosaurio",2,87450,59,3],
+    [20,"Microonda",2,74370,11,1],
+    [21,"Cerveza",6,4100,60,2],
+    [22,"Teléfono inteligente",10,900110,22,0],
+    [23,"Lavadora",8,769020,87,1],
+    [24,"Auto de juguete",6,82890,48,3]
+    [25,"Tableta",9,228790,77,0],
+    [26,"Dinosaurio",1,7280,13,1],
+    [27,"Computadora portátil",7,17790,45,0],
+    [28,"Impresora",4,60150,49,0],
+    [29,"Lavadora",12,618900,96,1],
+    [30,"Computadora portátil",10,65730,81,0],
+    [31,"Acondicionador de aire",8,1398100,62,0],
+    [32,"Refrigerador",4,20180,67,1],
+    [33,"Vino",12,98600,10,2],
+    [34,"Impresora",14,228660,18,0],
+    [35,"Acondicionador de aire",5,1278600,60,1],
+    [36,"Teléfono inteligente",10,2700590,54,0],
+    [37,"Impresora",1,44100,55,0],
+    [38,"Ratón",10,40070,32,0],
+    [39,"Computadora portátil",4,85360,44,0],
+    [40,"Aspiradora",6,964660,75,1],
+    [41,"Reloj inteligente",2,16500,84,0],
+    [42,"Cámara",7,6718610,94,0],
+    [43,"Teclado",1,220930,66,0],
+    [44,"Cafetera",14,237830,30,1],
+    [45,"Acondicionador de aire",0,1863000,41,0],
+    [46,"Vino",15,22140,81,2],
+    [47,"Teléfono inteligente",14,2100910,46,0],
+    [48,"Aspiradora",10,26480,81,0],
+    [49,"Cámara web",14,45160,22,0],
+    [50,"Aspiradora",2,88870,7,1],
+    [51,"Dinosaurio",1,62900,30,3],
+    [52,"Aspiradora",6,46540,95,1],
+    [53,"Auto de juguete",1,98820,85,3]
+    [54,"Teléfono inteligente",2,1500090,70,0],
+    [55,"Impresora",4,26390,58,0],
+    [56,"Dinosaurio",10,97330,44,3],
+    [57,"Disco duro externo",16,16120,33,0]
+    [58,"Ratón",1,99380,78,0],
+    [59,"Cámara web",1,81900,35,0],
+    [60,"Cámara",7,5289620,77,0],
+    [61,"Monitor",10,28320,30,0],
+    [62,"Computadora portátil",1,1570930,53,0],
+    [63,"Vino",17,81430,19,2],
+    [64,"Reloj inteligente",14,541200,31,0],
+    [65,"Refrigerador",3,80460,91,0],
+    [66,"Auto de juguete",6,89480,40,3]
+    [67,"Auriculares",4,22610,88,0],
+    [68,"Tableta",18,382660,32,0],
+    [69,"Vino",19,48780,10,2],
+    [70,"Cámara",1,94700,98,0],
+    [71,"Impresora",2,97160,74,0],
+    [72,"Computadora portátil",7,88200,54,0],
+    [73,"Vino",18,65920,94,2],
+    [74,"Impresora",7,3130,36,0],
+    [75,"Cámara web",3,151700,14,0],
+    [76,"Cámara web",1,60290,95,0],
+    [77,"Monitor",1,25530,98,0],
+    [78,"Vino",13,46970,17,2],
+    [79,"Monitor",22,74920,87,0],
+    [80,"Impresora",2,20140,24,0],
+    [81,"Ratón",2,81770,65,0],
+    [82,"Acondicionador de aire",12,2609000,91,1]
+    [83,"Reloj inteligente",7,44450,17,0],
+    [84,"Router",10,116080,90,0],
+    [85,"Monitor",7,41170,91,0],
+    [86,"Refrigerador",14,207870,17,1],
+    [87,"Ratón",6,93150,46,0],
+    [88,"Acondicionador de aire",22,1202330,46,0]
+    [89,"Impresora",14,81690,2,0],
+    [90,"Dinosaurio",7,71890,67,3],
+    [91,"Computadora portátil",7,72480,5,0],
+    [92,"Cámara web",2,160810,74,0],
+    [93,"Router",22,104590,72,0],
+    [94,"Auriculares",7,10300,66,0],
+    [95,"Cafetera",3,185570,6,1],
+    [96,"Ratón",1,91510,81,0],
+    [97,"Teléfono inteligente",7,393900,6,0],
+    [98,"Teléfono inteligente",4,81670,11,0],
+    [99,"Disco duro externo",23,903260,57,0],
+    [100,"Acondicionador de aire",24,941390,15,1]
+]
 
-    def generate_report(self):
-        # Generate a report from the sales data
-        # Example: print the total sales
-        print("Sales Report")
-        self.analyze_sales()
 
-    def run(self):
-        # Main execution method
-        csv_files = [file for file in os.listdir() if file.endswith('.csv')]
-        json_files = [file for file in os.listdir() if file.endswith('.json')]
-
-        for csv_file in csv_files:
-            self.load_csv(csv_file)
-
-        for json_file in json_files:
-            self.load_json(json_file)
-
-        self.generate_report()
-
-if __name__ == "__main__":
-    platform = SalesDataPlatform()
-    platform.run()

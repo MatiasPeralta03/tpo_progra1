@@ -14,38 +14,37 @@
 import requests
 from bs4 import BeautifulSoup
 
-def calcularCostoSubte(num1):
+def calcularCostoSubte(viajes):
 
     url = "https://www.argentina.gob.ar/redsube/tarifas-de-transporte-publico-amba"
 
-    response = requests.get(url)
+    #response = requests.get(url)
 
-    if response.status_code == 200:
-        # Parse the content of the page
-        soup = BeautifulSoup(response.content, 'html.parser')
-        
-        # Extraemos el precio actualizado de la pagina gubernamental de precios del transporte publico
-        precioSubte = int(soup.find_all('td')[36].contents[0][2:]) # 650 pesos
-    else:
-        print("Failed to retrieve the webpage")
+    #if response.status_code == 200:
+    #    # Parse the content of the page
+    #    soup = BeautifulSoup(response.content, 'html.parser')
+    #    
+    #    # Extraemos el precio actualizado de la pagina gubernamental de precios del transporte publico
+    #    precioSubte = 650 #int(soup.find_all('td')[36].contents[0][2:]) # 650 pesos
+    #else:
+    #    print("Failed to retrieve the webpage")
 
-    precio = 0
-    for i in range(1, num1 + 1):
-        if 1 <= i <= 20:
-            precio = precio + precioSubte
-        elif 21 <= i <= 30:
-            precio = precio + int(precioSubte * 0.80)
-        elif 31 <= i <= 40:
-            precio = precio + int(precioSubte * 0.70)
-        elif 41 <= i:
-            precio = precio + int(precioSubte * 0.60)
-        
-    print("El precio final con los descuentos aplicados es de:", precio)
+    precioSubte = 650
 
-num1 = int(input("Ingrese el valor de viajes efectuados: "))
+    if 1 <= viajes <= 20:
+        return precioSubte*viajes
+    elif 21 <= viajes <= 30:
+        return precioSubte*20 + precioSubte*0.80
+    elif 31 <= viajes <= 40:
+        return precioSubte*20 + precioSubte * 0.70
+    elif 41 <= viajes:
+        return precioSubte*20 + precioSubte * 0.60
 
-while num1 <= 0:
-    num1 = int(input("Ingrese un valor valido de viajes efectuados mayor a 0: "))
+viajes = int(input("Ingrese el valor de viajes efectuados: "))
 
-calcularCostoSubte(num1)
+while viajes <= 0:
+    viajes = int(input("Ingrese un valor valido de viajes efectuados mayor a 0: "))
+
+print("El precio final con los descuentos aplicados es de:", calcularCostoSubte(viajes))
+
 

@@ -17,17 +17,17 @@ def generar_lista_random(lenght):
 
 def elemento_repetido(lst):
     rep = False
-    index = 0
-    while rep == False and index != (len(lst) - 1):
-        if lst.count(lst[index]) >= 2:
-            rep = True
-        index = index + 1
+#    index = 0
+#    while rep == False and index != (len(lst) - 1):
+#        if lst.count(lst[index]) >= 2:
+#            rep = True
+#        index = index + 1
 
 #    Otra forma menos optima
-#    for value in lst:
-#        if lst.count(value) >= 2:
-#            rep = True
-
+    for value in lst:
+        if lst.count(value) > 1:
+            rep = True
+            break
     return rep
              
 def depurar_elementos_unicos(lst):
