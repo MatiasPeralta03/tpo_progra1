@@ -40,7 +40,7 @@ marcas= [
     [24,"WU"]
 ]
 
-''' Matriz de productos Nx5, siendo N la cantidad de filas.
+''' Matriz de productos Nx6, siendo N la cantidad de filas.
     Los campos son id,nombre,marca,precio_unitario,cantidad,categoria '''
 
 productos=[
@@ -67,7 +67,7 @@ productos=[
     [21,"Cerveza",6,4100,60,2],
     [22,"Teléfono inteligente",10,900110,22,0],
     [23,"Lavadora",8,769020,87,1],
-    [24,"Auto de juguete",6,82890,48,3]
+    [24,"Auto de juguete",6,82890,48,3],
     [25,"Tableta",9,228790,77,0],
     [26,"Dinosaurio",1,7280,13,1],
     [27,"Computadora portátil",7,17790,45,0],
@@ -96,11 +96,11 @@ productos=[
     [50,"Aspiradora",2,88870,7,1],
     [51,"Dinosaurio",4,62900,30,3],
     [52,"Aspiradora",6,46540,95,1],
-    [53,"Auto de juguete",4,98820,85,3]
+    [53,"Auto de juguete",4,98820,85,3],
     [54,"Teléfono inteligente",2,1500090,70,0],
     [55,"Impresora",4,26390,58,0],
     [56,"Dinosaurio",10,97330,44,3],
-    [57,"Disco duro externo",16,16120,33,0]
+    [57,"Disco duro externo",15,16120,33,0],
     [58,"Ratón",1,99380,78,0],
     [59,"Cámara web",1,81900,35,0],
     [60,"Cámara",7,5289620,77,0],
@@ -109,7 +109,7 @@ productos=[
     [63,"Vino",18,81430,19,2],
     [64,"Reloj inteligente",14,541200,31,0],
     [65,"Refrigerador",3,80460,91,0],
-    [66,"Auto de juguete",6,89480,40,3]
+    [66,"Auto de juguete",6,89480,40,3],
     [67,"Auriculares",4,22610,88,0],
     [68,"Tableta",17,382660,32,0],
     [69,"Vino",19,48780,10,2],
@@ -125,13 +125,13 @@ productos=[
     [79,"Monitor",22,74920,87,0],
     [80,"Impresora",2,20140,24,0],
     [81,"Ratón",2,81770,65,0],
-    [82,"Acondicionador de aire",12,2609000,91,1]
+    [82,"Acondicionador de aire",12,2609000,91,1],
     [83,"Reloj inteligente",7,44450,17,0],
     [84,"Router",10,116080,90,0],
     [85,"Monitor",7,41170,91,0],
     [86,"Refrigerador",14,207870,17,1],
     [87,"Ratón",6,93150,46,0],
-    [88,"Acondicionador de aire",22,1202330,46,0]
+    [88,"Acondicionador de aire",22,1202330,46,0],
     [89,"Impresora",14,81690,2,0],
     [90,"Dinosaurio",7,71890,67,3],
     [91,"Computadora portátil",7,72480,5,0],
@@ -146,4 +146,72 @@ productos=[
     [100,"Acondicionador de aire",24,941390,15,1]
 ]
 
-print()
+#Total de ventas
+total_ventas = 0
+lista_valores_por_marca = [0]*len(marcas)
+lista_top = []
+for producto in productos:
+    total_ventas += producto[3] * producto[4]
+    lista_valores_por_marca[producto[2] - 1] += producto[3] * producto[4]
+
+for i in range(len(lista_valores_por_marca) - 1):
+    lista_top.append([marcas[i][1], lista_valores_por_marca[i]])
+
+lista_top_ordenada = sorted(lista_top, key=lambda x: x[1], reverse=True)
+print("Top 10 de marcas con mas ventas")
+for i in range(10):
+    print(f"- {lista_top_ordenada[i][0]} - {lista_top_ordenada[i][1]}$")
+
+print(f"Capital total de ganancia: {total_ventas}$") 
+
+# 1. Determinar las marcas más vendidas
+marca_ventas = {}
+for producto in productos:
+    marca_id = producto[2]
+    cantidad = producto[4]
+    if marca_id in marca_ventas:
+        marca_ventas[marca_id] += cantidad
+    else:
+        marca_ventas[marca_id] = cantidad
+
+# Encontrar la marca más vendida
+max_ventas = -1
+marca_mas_vendida = None
+for marca_id in marca_ventas:
+    if marca_ventas[marca_id] > max_ventas:
+        max_ventas = marca_ventas[marca_id]
+        marca_mas_vendida = marca_id
+
+# 2. Determinar la mayor venta (precio total = precio unitario * cantidad)
+mayor_venta_producto = productos[0]
+max_total_venta = productos[0][3] * productos[0][4]
+
+for producto in productos[1:]:
+    total_venta = producto[3] * producto[4]
+    if total_venta > max_total_venta:
+        max_total_venta = total_venta
+        mayor_venta_producto = producto
+
+nombre_mayor_venta = mayor_venta_producto[1]
+total_mayor_venta = max_total_venta
+
+# 3. Determinar la categoría más consumida
+categoria_consumo = {}
+for producto in productos:
+    categoria_id = producto[5]
+    cantidad = producto[4]
+    if categoria_id in categoria_consumo:
+        categoria_consumo[categoria_id] += cantidad
+    else:
+        categoria_consumo[categoria_id] = cantidad
+
+# Encontrar la categoría más consumida
+max_consumo = -1
+categoria_mas_consumida = None
+for categoria_id in categoria_consumo:
+    if categoria_consumo[categoria_id] > max_consumo:
+        max_consumo = categoria_consumo[categoria_id]
+        categoria_mas_consumida = categoria_id
+
+# Resultados
+print(f"Mayor venta: {nombre_mayor_venta} con un total de ${total_mayor_venta}.")
