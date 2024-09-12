@@ -37,9 +37,6 @@ categorias = [
     [4,"Juegos y Juguetes"]
 ]
 
-''' Matriz de productos Nx6, siendo N la cantidad de filas.
-    Los campos son id,nombre,marca,precio_unitario,cantidad,categoria '''
-
 productos = [
     [1, 'Tableta', 1, 1, 300000],   # ID, Nombre, ID Marca, ID Categoría, Precio Unitario
     [2, 'Lavadora', 22, 2, 500000], 
@@ -67,7 +64,10 @@ productos = [
 
 ventas = [
     [1, 1, 10],  # ID Venta, ID Producto, Cantidad Vendida
-    [2, 5, 20]
+    [2, 5, 20],
+    [3, 11, 13],
+    [4, 14, 21],
+    [5, 10, 9]
 ]
 
 def agregar_categoria():
@@ -367,25 +367,85 @@ def ver_ventas():
     if ventas:
         print(f"{'ID':<4}{'Producto':<25}{'Cantidad':<20}{'Precio Unitario':<25}{'Marca':<15}{'Categoría':<20}")
         for venta in ventas:
-            # Encontrar nombre de producto para mostrar
+            # Encontrar el producto relacionado con la venta
             producto_nombre = "Desconocido"
+            precio_unitario = 0
+            marca_nombre = "Desconocida"
+            categoria_nombre = "Desconocida"
+            
             for producto in productos:
                 if producto[0] == venta[1]:
                     producto_nombre = producto[1]
                     precio_unitario = producto[4]
-                marca_nombre = "Desconocida"
-                for marca in marcas:
-                    if marca[0] == producto[2]:
-                        marca_nombre = marca[1]
-                        break
-                categoria_nombre = "Desconocida"
-                for categoria in categorias:
-                    if categoria[0] == producto[3]:
-                        categoria_nombre = categoria[1]
-                        break
+                    
+                    # Encontrar el nombre de la marca y la categoría del producto
+                    for marca in marcas:
+                        if marca[0] == producto[2]:
+                            marca_nombre = marca[1]
+                            break
+                    
+                    for categoria in categorias:
+                        if categoria[0] == producto[3]:
+                            categoria_nombre = categoria[1]
+                            break
                     break
 
             print(f"{venta[0]:<4}{producto_nombre:<25}{venta[2]:<20}{precio_unitario:<25}{marca_nombre:<15}{categoria_nombre:<20}")
+
+def generar_informes():
+    # Diccionarios para almacenar resultados
+    ganancias_por_marca = {}
+    ganancias_por_categoria = {}
+
+    # Inicializar los diccionarios
+    for marca in marcas:
+        ganancias_por_marca[marca[0]] = 0
+
+    for categoria in categorias:
+        ganancias_por_categoria[categoria[0]] = 0
+
+    # Calcular las ganancias
+    for venta in ventas:
+        id_producto = venta[1]
+        cantidad_vendida = venta[2]
+
+        # Encontrar el producto correspondiente
+        for producto in productos:
+            if producto[0] == id_producto:
+                precio_unitario = producto[4]
+                id_marca = producto[2]
+                id_categoria = producto[3]
+                
+                # Calcular la ganancia
+                ganancia = cantidad_vendida * precio_unitario
+                
+                # Acumulando la ganancia por marca
+                if id_marca in ganancias_por_marca:
+                    ganancias_por_marca[id_marca] += ganancia
+                
+                # Acumulando la ganancia por categoría
+                if id_categoria in ganancias_por_categoria:
+                    ganancias_por_categoria[id_categoria] += ganancia
+                break
+
+    # Imprimir los resultados
+    print("\nInforme de Ganancias por Marca:")
+    for marca_id, ganancia in ganancias_por_marca.items():
+        marca_nombre = "Desconocida"
+        for marca in marcas:
+            if marca[0] == marca_id:
+                marca_nombre = marca[1]
+                break
+        print(f"Marca: {marca_nombre}, Ganancia Total: {ganancia:.2f}")
+
+    print("\nInforme de Ganancias por Categoría:")
+    for categoria_id, ganancia in ganancias_por_categoria.items():
+        categoria_nombre = "Desconocida"
+        for categoria in categorias:
+            if categoria[0] == categoria_id:
+                categoria_nombre = categoria[1]
+                break
+        print(f"Categoría: {categoria_nombre}, Ganancia Total: {ganancia:.2f}")
 
 print('')
 print('1.  Ver ventas')
@@ -401,12 +461,13 @@ print('10. Actualizar producto')
 print('11. Actualizar marca')
 print('12. Actualizar categoria')
 print('13. Eliminar venta')
-print('14. Salir')
+print('14. Generar informes')
+print('15. Salir')
 print('')
 
 num = int(input())
 
-while num != 14:
+while num != 15:
 
     if num == 1:
         ver_ventas()
@@ -434,6 +495,8 @@ while num != 14:
         actualizar_categoria()
     elif num == 13:
         eliminar_venta()
+    elif num == 14:
+        generar_informes()
     else:
         print('')
         print('--Ingrese un valor valido dentro de las opciones--')
@@ -452,6 +515,7 @@ while num != 14:
     print('11. Actualizar marca')
     print('12. Actualizar categoria')
     print('13. Eliminar venta')
-    print('14. Salir')
+    print('14. Generar informes')
+    print('15. Salir')
     print('')
     num = int(input())
