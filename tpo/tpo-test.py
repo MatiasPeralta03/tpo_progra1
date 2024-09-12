@@ -2,18 +2,8 @@
     Para esto se generó una matriz con los 100 productos comercializados en el mes. También generamos 
     2 listas "maestras" de categorias y marcas. Estos dos campos corresponden al índice '''
 
-#Lista de Categorias
-
-categorias = [
-    [1,"Tecnología"],
-    [2,"Electrodomésticos"],
-    [3,"Supermercado"],
-    [4,"Juegos y Juguetes"]
-]
-
-#Lista de Marcas
-
-marcas= [
+# Tablas maestras
+marcas = [
     [1,"Samsung"], 
     [2,"EcoBrand"], 
     [3,"Electra"],
@@ -40,178 +30,428 @@ marcas= [
     [24,"WU"]
 ]
 
+categorias = [
+    [1,"Tecnología"],
+    [2,"Electrodoméstico"],
+    [3,"Supermercado"],
+    [4,"Juegos y Juguetes"]
+]
+
 ''' Matriz de productos Nx6, siendo N la cantidad de filas.
     Los campos son id,nombre,marca,precio_unitario,cantidad,categoria '''
 
-productos=[
-    [1,"Tableta",3,347610,72,0],
-    [2,"Lavadora",5,618650,96,1],
-    [3,"Router",1,73760,1,0],
-    [4,"Cafetera",2,93530,45,1],
-    [5,"Cerveza",3,3500,29,1],
-    [6,"Cámara",4,760310,14,0],
-    [7,"Tableta",5,479000,40,0],
-    [8,"Teclado",6,56840,2,0],
-    [9,"Monitor",2,44000,82,0],
-    [10,"Microonda",3,2860,22,1],
-    [11,"Refrigerador",7,929780,82,1],
-    [12,"Ratón",1,65030,85,0],
-    [13,"Lavadora",5,827970,11,1],
-    [14,"Cámara",4,2038760,10,0],
-    [15,"Router",6,86540,43,0],
-    [16,"Aspiradora",4,16980,73,1],
-    [17,"Microonda",2,112780,82,1],
-    [18,"Cámara web",1,65400,2,0],
-    [19,"Dinosaurio",2,87450,59,3],
-    [20,"Microonda",2,74370,11,1],
-    [21,"Cerveza",6,4100,60,2],
-    [22,"Teléfono inteligente",10,900110,22,0],
-    [23,"Lavadora",8,769020,87,1],
-    [24,"Auto de juguete",6,82890,48,3],
-    [25,"Tableta",9,228790,77,0],
-    [26,"Dinosaurio",1,7280,13,1],
-    [27,"Computadora portátil",7,17790,45,0],
-    [28,"Impresora",4,60150,49,0],
-    [29,"Lavadora",12,618900,96,1],
-    [30,"Computadora portátil",10,65730,81,0],
-    [31,"Acondicionador de aire",8,1398100,62,0],
-    [32,"Refrigerador",4,20180,67,1],
-    [33,"Vino",13,98600,10,2],
-    [34,"Impresora",14,228660,17,0],
-    [35,"Acondicionador de aire",5,1278600,60,1],
-    [36,"Teléfono inteligente",10,2700590,54,0],
-    [37,"Impresora",1,44100,55,0],
-    [38,"Ratón",10,40070,32,0],
-    [39,"Computadora portátil",4,85360,44,0],
-    [40,"Aspiradora",6,964660,75,1],
-    [41,"Reloj inteligente",2,16500,84,0],
-    [42,"Cámara",7,6718610,94,0],
-    [43,"Teclado",1,220930,66,0],
-    [44,"Cafetera",14,237830,30,1],
-    [45,"Acondicionador de aire",1,1863000,41,0],
-    [46,"Vino",16,22140,81,2],
-    [47,"Teléfono inteligente",14,2100910,46,0],
-    [48,"Aspiradora",10,26480,81,0],
-    [49,"Cámara web",14,45160,22,0],
-    [50,"Aspiradora",2,88870,7,1],
-    [51,"Dinosaurio",4,62900,30,3],
-    [52,"Aspiradora",6,46540,95,1],
-    [53,"Auto de juguete",4,98820,85,3],
-    [54,"Teléfono inteligente",2,1500090,70,0],
-    [55,"Impresora",4,26390,58,0],
-    [56,"Dinosaurio",10,97330,44,3],
-    [57,"Disco duro externo",15,16120,33,0],
-    [58,"Ratón",1,99380,78,0],
-    [59,"Cámara web",1,81900,35,0],
-    [60,"Cámara",7,5289620,77,0],
-    [61,"Monitor",10,28320,30,0],
-    [62,"Computadora portátil",1,1570930,53,0],
-    [63,"Vino",18,81430,19,2],
-    [64,"Reloj inteligente",14,541200,31,0],
-    [65,"Refrigerador",3,80460,91,0],
-    [66,"Auto de juguete",6,89480,40,3],
-    [67,"Auriculares",4,22610,88,0],
-    [68,"Tableta",17,382660,32,0],
-    [69,"Vino",19,48780,10,2],
-    [70,"Cámara",1,94700,98,0],
-    [71,"Impresora",2,97160,74,0],
-    [72,"Computadora portátil",7,88200,54,0],
-    [73,"Vino",20,65920,94,2],
-    [74,"Impresora",7,3130,36,0],
-    [75,"Cámara web",3,151700,14,0],
-    [76,"Cámara web",1,60290,95,0],
-    [77,"Monitor",1,25530,98,0],
-    [78,"Vino",14,46970,17,2],
-    [79,"Monitor",22,74920,87,0],
-    [80,"Impresora",2,20140,24,0],
-    [81,"Ratón",2,81770,65,0],
-    [82,"Acondicionador de aire",12,2609000,91,1],
-    [83,"Reloj inteligente",7,44450,17,0],
-    [84,"Router",10,116080,90,0],
-    [85,"Monitor",7,41170,91,0],
-    [86,"Refrigerador",14,207870,17,1],
-    [87,"Ratón",6,93150,46,0],
-    [88,"Acondicionador de aire",22,1202330,46,0],
-    [89,"Impresora",14,81690,2,0],
-    [90,"Dinosaurio",7,71890,67,3],
-    [91,"Computadora portátil",7,72480,5,0],
-    [92,"Cámara web",2,160810,74,0],
-    [93,"Router",22,104590,72,0],
-    [94,"Auriculares",7,10300,66,0],
-    [95,"Cafetera",3,185570,6,1],
-    [96,"Ratón",1,91510,81,0],
-    [97,"Teléfono inteligente",7,393900,6,0],
-    [98,"Teléfono inteligente",4,81670,11,0],
-    [99,"Disco duro externo",23,903260,57,0],
-    [100,"Acondicionador de aire",24,941390,15,1]
+productos = [
+    [1, 'Tableta', 1, 1, 300000],   # ID, Nombre, ID Marca, ID Categoría, Precio Unitario
+    [2, 'Lavadora', 22, 2, 500000], 
+    [3, 'Router', 1, 1, 100000], 
+    [4, 'Cafetera', 2, 2, 1500000], 
+    [5, 'Cerveza', 4, 3, 2000], 
+    [6, 'Cámara', 3, 1, 250000], 
+    [7, 'Teclado', 5, 1, 75000], 
+    [8, 'Monitor', 6, 1, 200000], 
+    [9, 'Microonda', 7, 2, 120000], 
+    [10, 'Refrigerador', 8, 2, 600000], 
+    [11, 'Ratón', 9, 1, 30000], 
+    [12, 'Aspiradora', 10, 2, 180000], 
+    [13, 'Cámara web', 11, 1, 70000], 
+    [14, 'Dinosaurio', 11, 4, 40000], 
+    [15, 'Teléfono inteligente', 1, 1, 800000], 
+    [16, 'Auto de juguete', 17, 4, 25000], 
+    [17, 'Computadora portátil', 7, 1, 1200000], 
+    [18, 'Impresora', 6, 1, 1500000], 
+    [19, 'Acondicionador de aire', 5, 2, 700000], 
+    [20, 'Vino', 14, 3, 30000], 
+    [21, 'Reloj inteligente', 4, 1, 250000], 
+    [22, 'Disco duro externo', 3, 1, 100000]
 ]
 
-#Total de ventas
-total_ventas = 0
-lista_valores_por_marca = [0]*len(marcas)
-lista_top = []
-for producto in productos:
-    total_ventas += producto[3] * producto[4]
-    lista_valores_por_marca[producto[2] - 1] += producto[3] * producto[4]
+ventas = [
+    [1, 1, 10],  # ID Venta, ID Producto, Cantidad Vendida
+    [2, 5, 20]
+]
 
-for i in range(len(lista_valores_por_marca) - 1):
-    lista_top.append([marcas[i][1], lista_valores_por_marca[i]])
+def agregar_categoria():
+    # Verificar si la marca ya existe
+    nombre_categoria = str(input("Ingrese el nombre de la categoria a agregar: "))
 
-lista_top_ordenada = sorted(lista_top, key=lambda x: x[1], reverse=True)
-print("Top 10 de marcas con mas ventas")
-for i in range(10):
-    print(f"- {lista_top_ordenada[i][0]} - {lista_top_ordenada[i][1]}$")
+    existe_categoria = False
+    for categoria in categorias:
+        if categoria[1] == nombre_categoria:
+            existe_categoria = True
+            break
 
-print(f"Capital total de ganancia: {total_ventas}$") 
-
-# 1. Determinar las marcas más vendidas
-marca_ventas = {}
-for producto in productos:
-    marca_id = producto[2]
-    cantidad = producto[4]
-    if marca_id in marca_ventas:
-        marca_ventas[marca_id] += cantidad
+    if existe_categoria:
+        print(f"La marca '{nombre_categoria}' ya existe.")
     else:
-        marca_ventas[marca_id] = cantidad
+        nuevo_id = len(categorias) + 1
+        categorias.append([nuevo_id, nombre_categoria])
+        print(f"Marca '{nombre_categoria}' agregada con ID {nuevo_id}.")
 
-# Encontrar la marca más vendida
-max_ventas = -1
-marca_mas_vendida = None
-for marca_id in marca_ventas:
-    if marca_ventas[marca_id] > max_ventas:
-        max_ventas = marca_ventas[marca_id]
-        marca_mas_vendida = marca_id
+def agregar_marca():
+    # Verificar si la marca ya existe
+    nombre_marca = str(input("Ingrese el nombre de la marca a agregar: "))
 
-# 2. Determinar la mayor venta (precio total = precio unitario * cantidad)
-mayor_venta_producto = productos[0]
-max_total_venta = productos[0][3] * productos[0][4]
+    existe_marca = False
+    for marca in marcas:
+        if marca[1] == nombre_marca:
+            existe_marca = True
+            break
 
-for producto in productos[1:]:
-    total_venta = producto[3] * producto[4]
-    if total_venta > max_total_venta:
-        max_total_venta = total_venta
-        mayor_venta_producto = producto
-
-nombre_mayor_venta = mayor_venta_producto[1]
-total_mayor_venta = max_total_venta
-
-# 3. Determinar la categoría más consumida
-categoria_consumo = {}
-for producto in productos:
-    categoria_id = producto[5]
-    cantidad = producto[4]
-    if categoria_id in categoria_consumo:
-        categoria_consumo[categoria_id] += cantidad
+    if existe_marca:
+        print(f"La marca '{nombre_marca}' ya existe.")
     else:
-        categoria_consumo[categoria_id] = cantidad
+        nuevo_id = len(marcas) + 1
+        marcas.append([nuevo_id, nombre_marca])
+        print(f"Marca '{nombre_marca}' agregada con ID {nuevo_id}.")
 
-# Encontrar la categoría más consumida
-max_consumo = -1
-categoria_mas_consumida = None
-for categoria_id in categoria_consumo:
-    if categoria_consumo[categoria_id] > max_consumo:
-        max_consumo = categoria_consumo[categoria_id]
-        categoria_mas_consumida = categoria_id
+def agregar_producto():
+    # Solicitar datos al usuario
+    nombre_producto = input("Ingrese el nombre del producto: ")
 
-# Resultados
-print(f"Mayor venta: {nombre_mayor_venta} con un total de ${total_mayor_venta}.")
+    # Verificar si el producto ya existe
+    producto_existe = False
+    for producto in productos:
+        if producto[1] == nombre_producto:
+            producto_existe = True
+            break
+
+    if producto_existe:
+        print(f"El producto '{nombre_producto}' ya existe.")
+        return
+
+    nombre_marca = input("Ingrese el nombre de la marca: ")
+
+    # Buscar ID de la marca
+    id_marca = None
+    for marca in marcas:
+        if marca[1] == nombre_marca:
+            id_marca = marca[0]
+            break
+
+    if id_marca is None:
+        print(f"La marca '{nombre_marca}' no existe. Por favor, añádela primero.")
+        return
+
+    nombre_categoria = input("Ingrese el nombre de la categoría: ")
+
+    # Buscar ID de la categoría
+    id_categoria = None
+    for categoria in categorias:
+        if categoria[1] == nombre_categoria:
+            id_categoria = categoria[0]
+            break
+
+    if id_categoria is None:
+        print(f"La categoría '{nombre_categoria}' no existe. Por favor, añádela primero.")
+        return
+
+    precio_unitario = float(input("Ingrese el precio unitario del producto: "))
+
+    nuevo_id = len(productos) + 1
+    productos.append([nuevo_id, nombre_producto, id_marca, id_categoria, precio_unitario])
+    print(f"Producto '{nombre_producto}' agregado con ID {nuevo_id} y precio unitario {precio_unitario}.")
+
+def agregar_venta():
+    # Verificar si el ID del producto es válido
+    id_producto = int(input("Ingrese el ID del producto a agregar: "))
+
+    producto_valido = False
+    for producto in productos:
+        if producto[0] == id_producto:
+            producto_valido = True
+            break
+
+    if not producto_valido:
+        print(f"No se puede agregar la venta. El producto con ID {id_producto} no existe.")
+        return
+
+    cantidad_vendida = int(input("Ingrese la cantidad de unidades vendidas: "))
+
+    # Agregar la nueva venta
+    nuevo_id = len(ventas) + 1
+    nueva_venta = [nuevo_id, id_producto, cantidad_vendida]
+    ventas.append(nueva_venta)
+    print(f"Venta agregada: ID Venta {nuevo_id}, ID Producto {id_producto}, Cantidad Vendida {cantidad_vendida}.")
+
+def actualizar_categoria():
+
+    id_categoria = int(input("Ingrese el ID de la categoria a actualizar: "))
+
+    categoria_encontrada = False
+    for categoria in categorias:
+        if categoria[0] == id_categoria:
+            print(f"Modificarás la categoría {categoria[1]}")
+            categoria[1] = str(input("Ingrese la nueva categoría: "))
+            categoria_encontrada = True
+            print(f"Categoría con ID {id_categoria} actualizada a '{categoria[1]}'.")
+            break
+
+    if not categoria_encontrada:
+        print(f"No se encontró la categoría con ID {id_categoria}.")
+
+def actualizar_marca():
+
+    id_marca = int(input("Ingrese el ID de la marca a actualizar: "))
+
+    marca_encontrada = False
+    for marca in marcas:
+        if marca[0] == id_marca:
+            print(f"Modificarás la marca {marca[1]}")
+            marca[1] = str(input("Ingrese la nueva marca: "))
+            marca_encontrada = True
+            print(f"Marca con ID {id_marca} actualizada a '{marca[1]}'.")
+            break
+
+    if not marca_encontrada:
+        print(f"No se encontró la marca con ID {id_marca}.")
+
+def actualizar_producto():
+    # Solicitar datos al usuario
+    id_producto = int(input("Ingrese el ID del producto a actualizar: "))
+
+    producto_valido = False
+    for producto in productos:
+        if producto[0] == id_producto:
+            producto_valido = True
+            break
+
+    if not producto_valido:
+        print(f"No se puede agregar la venta. El producto con ID {id_producto} no existe.")
+        return
+
+    nuevo_nombre_producto = input("Ingrese el nuevo nombre del producto: ")
+    nuevo_id_marca = int(input("Ingrese el nuevo ID de la marca: "))
+
+    # Verificar si la marca existe
+    marca_existe = False
+    for marca in marcas:
+        if marca[0] == nuevo_id_marca:
+            marca_existe = True
+            break
+    
+    if not marca_existe:
+        print(f"La marca con ID {nuevo_id_marca} no existe.")
+        return
+
+    nuevo_id_categoria = int(input("Ingrese el nuevo ID de la categoría: "))
+
+    # Verificar si la categoría existe
+    categoria_existe = False
+    for categoria in categorias:
+        if categoria[0] == nuevo_id_categoria:
+            categoria_existe = True
+            break
+    
+    if not categoria_existe:
+        print(f"La categoría con ID {nuevo_id_categoria} no existe.")
+        return
+
+    nuevo_precio_unitario = float(input("Ingrese el nuevo precio unitario del producto: "))
+
+    # Actualizar el producto
+    producto_encontrado = False
+    for producto in productos:
+        if producto[0] == id_producto:
+            producto[1] = nuevo_nombre_producto
+            producto[2] = nuevo_id_marca
+            producto[3] = nuevo_id_categoria
+            producto[4] = nuevo_precio_unitario
+            producto_encontrado = True
+            print(f"Producto con ID {id_producto} actualizado.")
+            break
+
+    if not producto_encontrado:
+        print(f"No se encontró el producto con ID {id_producto}.")
+
+def actualizar_venta():
+    # Solicitar datos al usuario
+    id_venta = int(input("Ingrese el ID de la venta a actualizar: "))
+
+    # Verificar si la venta existe
+    venta_encontrada = False
+    for venta in ventas:
+        if venta[0] == id_venta:
+            venta_encontrada = True
+            break
+
+    if not venta_encontrada:
+        print(f"No se puede actualizar la venta. La venta con ID {id_venta} no existe.")
+        return
+
+    # Solicitar el nuevo ID del producto
+    id_producto = int(input("Ingrese el nuevo ID del producto: "))
+
+    # Verificar si el ID del producto es válido
+    producto_valido = False
+    for producto in productos:
+        if producto[0] == id_producto:
+            producto_valido = True
+            break
+    
+    if not producto_valido:
+        print(f"No se puede actualizar la venta. El producto con ID {id_producto} no existe.")
+        return
+
+    # Solicitar la nueva cantidad vendida
+    nueva_cantidad = int(input("Ingrese la nueva cantidad vendida: "))
+
+    # Actualizar la venta
+    for venta in ventas:
+        if venta[0] == id_venta:
+            venta[1] = id_producto
+            venta[2] = nueva_cantidad
+            print(f"Venta con ID {id_venta} actualizada exitosamente.")
+            return
+
+    print(f"No se encontró la venta con ID {id_venta}.")
+
+def eliminar_venta():
+    # Solicitar el ID de la venta a eliminar
+    id_venta = int(input("Ingresa el ID de la venta a eliminar: "))
+
+    # Buscar la venta con el ID especificado
+    venta_a_eliminar = None
+    for venta in ventas:
+        if venta[0] == id_venta:
+            venta_a_eliminar = venta
+            break
+    
+    if venta_a_eliminar:
+        ventas.remove(venta_a_eliminar)
+        print(f"Venta con ID {id_venta} eliminada.")
+    else:
+        print(f"No se encontró venta con ID {id_venta}.")
+
+def ver_categorias():
+    print('')
+    if categorias:
+        print(f"{'ID':<4}{'Categoría':<25}")
+        for categoria in categorias:
+            print(f"{categoria[0]:<4}{categoria[1]:<25}")
+    else:
+        print("No hay categorías disponibles.")
+    print('')
+
+def ver_marcas():
+    print('')
+    if marcas:
+        print(f"{'ID':<4}{'Marca':<25}")
+        for marca in marcas:
+            print(f"{marca[0]:<4}{marca[1]:<25}")
+    else:
+        print("No hay marcas disponibles.")
+    print('')
+
+def ver_productos():
+    if productos:
+        print(f"{'ID':<4}{'Producto':<25}{'Precio Unitario':<25}{'Marca':<20}{'Categoría':<20}")
+        for producto in productos:
+            # Encontrar nombre de marca y categoría para mostrar
+            marca_nombre = "Desconocida"
+            for marca in marcas:
+                if marca[0] == producto[2]:
+                    marca_nombre = marca[1]
+                    break
+
+            categoria_nombre = "Desconocida"
+            for categoria in categorias:
+                if categoria[0] == producto[3]:
+                    categoria_nombre = categoria[1]
+                    break
+
+            print(f"{producto[0]:<4}{producto[1]:<25}{producto[4]:<25}{marca_nombre:<20}{categoria_nombre:<20}")
+    else:
+        print("No hay productos disponibles.")
+
+def ver_ventas():
+    if ventas:
+        print(f"{'ID':<4}{'Producto':<25}{'Cantidad':<20}{'Precio Unitario':<25}{'Marca':<15}{'Categoría':<20}")
+        for venta in ventas:
+            # Encontrar nombre de producto para mostrar
+            producto_nombre = "Desconocido"
+            for producto in productos:
+                if producto[0] == venta[1]:
+                    producto_nombre = producto[1]
+                    precio_unitario = producto[4]
+                marca_nombre = "Desconocida"
+                for marca in marcas:
+                    if marca[0] == producto[2]:
+                        marca_nombre = marca[1]
+                        break
+                categoria_nombre = "Desconocida"
+                for categoria in categorias:
+                    if categoria[0] == producto[3]:
+                        categoria_nombre = categoria[1]
+                        break
+                    break
+
+            print(f"{venta[0]:<4}{producto_nombre:<25}{venta[2]:<20}{precio_unitario:<25}{marca_nombre:<15}{categoria_nombre:<20}")
+
+print('')
+print('1.  Ver ventas')
+print('2.  Ver productos')
+print('3.  Ver marcas')
+print('4.  Ver categorias')
+print('5.  Agregar venta')
+print('6.  Agregar producto')
+print('7.  Agregar marca')
+print('8.  Agregar categoria')
+print('9.  Actualizar venta')
+print('10. Actualizar producto')
+print('11. Actualizar marca')
+print('12. Actualizar categoria')
+print('13. Eliminar venta')
+print('14. Salir')
+print('')
+
+num = int(input())
+
+while num != 14:
+
+    if num == 1:
+        ver_ventas()
+    elif num == 2:
+        ver_productos()
+    elif num == 3:
+        ver_marcas()
+    elif num == 4:
+        ver_categorias()
+    elif num == 5:
+        agregar_venta()
+    elif num == 6:
+        agregar_producto()
+    elif num == 7:
+        agregar_marca()
+    elif num == 8:
+        agregar_categoria()
+    elif num == 9:
+        actualizar_venta()
+    elif num == 10:
+        actualizar_producto()
+    elif num == 11:
+        actualizar_marca()
+    elif num == 12:
+        actualizar_categoria()
+    elif num == 13:
+        eliminar_venta()
+    else:
+        print('')
+        print('--Ingrese un valor valido dentro de las opciones--')
+        print('')
+    print('')
+    print('1.  Ver ventas')
+    print('2.  Ver productos')
+    print('3.  Ver marcas')
+    print('4.  Ver categorias')
+    print('5.  Agregar venta')
+    print('6.  Agregar producto')
+    print('7.  Agregar marca')
+    print('8.  Agregar categoria')
+    print('9.  Actualizar venta')
+    print('10. Actualizar producto')
+    print('11. Actualizar marca')
+    print('12. Actualizar categoria')
+    print('13. Eliminar venta')
+    print('14. Salir')
+    print('')
+    num = int(input())
