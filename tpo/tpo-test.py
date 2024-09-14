@@ -3,6 +3,11 @@
     2 listas "maestras" de categorias y marcas. Estos dos campos corresponden al índice '''
 
 # Tablas maestras
+print('')
+print("-" * 80)
+print("Bienvenido al sistema de".center(80))
+print("Analisis de venta".center(80))
+print("-" * 80)
 marcas = [
     [1,"Samsung"], 
     [2,"EcoBrand"], 
@@ -32,7 +37,7 @@ marcas = [
 
 categorias = [
     [1,"Tecnología"],
-    [2,"Electrodoméstico"],
+    [2,"Electrodomésticos"],
     [3,"Supermercado"],
     [4,"Juegos y Juguetes"]
 ]
@@ -64,10 +69,11 @@ productos = [
 
 ventas = [
     [1, 1, 10],  # ID Venta, ID Producto, Cantidad Vendida
-    [2, 5, 20],
+    [2, 5, 90],
     [3, 11, 13],
-    [4, 14, 21],
-    [5, 10, 9]
+    [4, 14, 87],
+    [5, 10, 4],
+    [6, 20, 66]
 ]
 
 def agregar_categoria():
@@ -228,7 +234,7 @@ def actualizar_producto():
         if marca[0] == nuevo_id_marca:
             marca_existe = True
             break
-    
+
     if not marca_existe:
         print(f"La marca con ID {nuevo_id_marca} no existe.")
         return
@@ -241,7 +247,7 @@ def actualizar_producto():
         if categoria[0] == nuevo_id_categoria:
             categoria_existe = True
             break
-    
+
     if not categoria_existe:
         print(f"La categoría con ID {nuevo_id_categoria} no existe.")
         return
@@ -287,7 +293,7 @@ def actualizar_venta():
         if producto[0] == id_producto:
             producto_valido = True
             break
-    
+
     if not producto_valido:
         print(f"No se puede actualizar la venta. El producto con ID {id_producto} no existe.")
         return
@@ -315,7 +321,7 @@ def eliminar_venta():
         if venta[0] == id_venta:
             venta_a_eliminar = venta
             break
-    
+
     if venta_a_eliminar:
         ventas.remove(venta_a_eliminar)
         print(f"Venta con ID {id_venta} eliminada.")
@@ -343,6 +349,7 @@ def ver_marcas():
     print('')
 
 def ver_productos():
+    print('')
     if productos:
         print(f"{'ID':<4}{'Producto':<25}{'Precio Unitario':<25}{'Marca':<20}{'Categoría':<20}")
         for producto in productos:
@@ -365,44 +372,40 @@ def ver_productos():
 
 def ver_ventas():
     if ventas:
-        print(f"{'ID':<4}{'Producto':<25}{'Cantidad':<20}{'Precio Unitario':<25}{'Marca':<15}{'Categoría':<20}")
+        print('')
+        print("-" * 105)
+        print(f"{'ID':<5}{'Producto':<20}{'Cantidad':<20}{'Precio Unitario':<20}{'Marca':<20}{'Categoría':<20}")
+        print("-" * 105)
         for venta in ventas:
             # Encontrar el producto relacionado con la venta
             producto_nombre = "Desconocido"
             precio_unitario = 0
             marca_nombre = "Desconocida"
             categoria_nombre = "Desconocida"
-            
+
             for producto in productos:
                 if producto[0] == venta[1]:
                     producto_nombre = producto[1]
                     precio_unitario = producto[4]
-                    
+
                     # Encontrar el nombre de la marca y la categoría del producto
                     for marca in marcas:
                         if marca[0] == producto[2]:
                             marca_nombre = marca[1]
                             break
-                    
+
                     for categoria in categorias:
                         if categoria[0] == producto[3]:
                             categoria_nombre = categoria[1]
                             break
                     break
 
-            print(f"{venta[0]:<4}{producto_nombre:<25}{venta[2]:<20}{precio_unitario:<25}{marca_nombre:<15}{categoria_nombre:<20}")
+            print(f"{venta[0]:<5}{producto_nombre:<20}{venta[2]:<20}{precio_unitario:<20}{marca_nombre:<20}{categoria_nombre:<20}")
 
 def generar_informes():
     # Diccionarios para almacenar resultados
-    ganancias_por_marca = {}
-    ganancias_por_categoria = {}
-
-    # Inicializar los diccionarios
-    for marca in marcas:
-        ganancias_por_marca[marca[0]] = 0
-
-    for categoria in categorias:
-        ganancias_por_categoria[categoria[0]] = 0
+    ganancias_por_marca = [0]*len(marcas)
+    ganancias_por_categoria = [0]*len(categorias)
 
     # Calcular las ganancias
     for venta in ventas:
@@ -415,107 +418,101 @@ def generar_informes():
                 precio_unitario = producto[4]
                 id_marca = producto[2]
                 id_categoria = producto[3]
-                
+
                 # Calcular la ganancia
                 ganancia = cantidad_vendida * precio_unitario
-                
+
                 # Acumulando la ganancia por marca
-                if id_marca in ganancias_por_marca:
-                    ganancias_por_marca[id_marca] += ganancia
-                
+                ganancias_por_marca[id_marca - 1] += ganancia
+
                 # Acumulando la ganancia por categoría
-                if id_categoria in ganancias_por_categoria:
-                    ganancias_por_categoria[id_categoria] += ganancia
-                break
+                ganancias_por_categoria[id_categoria - 1] += ganancia
+
+    #Inicializamos contadores totales
+    total_gan_categ = 0
 
     # Imprimir los resultados
-    print("\nInforme de Ganancias por Marca:")
-    for marca_id, ganancia in ganancias_por_marca.items():
-        marca_nombre = "Desconocida"
-        for marca in marcas:
-            if marca[0] == marca_id:
-                marca_nombre = marca[1]
-                break
-        print(f"Marca: {marca_nombre}, Ganancia Total: {ganancia:.2f}")
-
-    print("\nInforme de Ganancias por Categoría:")
-    for categoria_id, ganancia in ganancias_por_categoria.items():
-        categoria_nombre = "Desconocida"
-        for categoria in categorias:
-            if categoria[0] == categoria_id:
-                categoria_nombre = categoria[1]
-                break
-        print(f"Categoría: {categoria_nombre}, Ganancia Total: {ganancia:.2f}")
-
-print('')
-print('1.  Ver ventas')
-print('2.  Ver productos')
-print('3.  Ver marcas')
-print('4.  Ver categorias')
-print('5.  Agregar venta')
-print('6.  Agregar producto')
-print('7.  Agregar marca')
-print('8.  Agregar categoria')
-print('9.  Actualizar venta')
-print('10. Actualizar producto')
-print('11. Actualizar marca')
-print('12. Actualizar categoria')
-print('13. Eliminar venta')
-print('14. Generar informes')
-print('15. Salir')
-print('')
-
-num = int(input())
-
-while num != 15:
-
-    if num == 1:
-        ver_ventas()
-    elif num == 2:
-        ver_productos()
-    elif num == 3:
-        ver_marcas()
-    elif num == 4:
-        ver_categorias()
-    elif num == 5:
-        agregar_venta()
-    elif num == 6:
-        agregar_producto()
-    elif num == 7:
-        agregar_marca()
-    elif num == 8:
-        agregar_categoria()
-    elif num == 9:
-        actualizar_venta()
-    elif num == 10:
-        actualizar_producto()
-    elif num == 11:
-        actualizar_marca()
-    elif num == 12:
-        actualizar_categoria()
-    elif num == 13:
-        eliminar_venta()
-    elif num == 14:
-        generar_informes()
-    else:
-        print('')
-        print('--Ingrese un valor valido dentro de las opciones--')
-        print('')
     print('')
-    print('1.  Ver ventas')
-    print('2.  Ver productos')
-    print('3.  Ver marcas')
-    print('4.  Ver categorias')
-    print('5.  Agregar venta')
-    print('6.  Agregar producto')
-    print('7.  Agregar marca')
-    print('8.  Agregar categoria')
-    print('9.  Actualizar venta')
-    print('10. Actualizar producto')
-    print('11. Actualizar marca')
-    print('12. Actualizar categoria')
-    print('13. Eliminar venta')
-    print('14. Generar informes')
-    print('15. Salir')
+    print("-" * 40)
+    print("Las marcas y sus ganancias".center(40))
+    print("-" * 40)
+
+    for i in range(len(ganancias_por_marca)):
+        print("-",marcas[i][1],end="")
+        print(str(ganancias_por_marca[i]).rjust(38 - len(marcas[i][1]),"."))
+
+    print("-" * 40)    
     print('')
-    num = int(input())
+    print("-" * 40)
+    print("Ganancia total por categoría".center(40))
+    print("-" * 40)
+
+    for i in range(len(ganancias_por_categoria)):
+        total_gan_categ += ganancias_por_categoria[i]
+        print("-",categorias[i][1],end="")
+        print(str(ganancias_por_categoria[i]).rjust(38 - len(categorias[i][1]),"."))
+    
+    print("-" * 40)
+    print('')
+    # Calcular porcentajes e imprimir listado final
+    print("-" * 40)
+    print("Ganancia porcentual por categoria".center(40))
+    print("-" * 40)
+    for i in range(len(ganancias_por_categoria)):
+        porcentaje = ganancias_por_categoria[i] * 100 / total_gan_categ
+        print("- %s (%.2f%%)" %(categorias[i][1], porcentaje), end=" ")
+        # Imprimir el gráfico de barras
+        puntos = "*" * int(porcentaje/10)
+        print(puntos.rjust(28 - len(categorias[i][1])," "))
+    print("-" * 40)
+
+def menu():
+    flag = True
+    while flag !=False:
+        num  = int(input('\n1.Ver Ventas\n2.Ver productos\n3.Ver marca\n4.ver cateogorias\n5.Agregar Venta\n6.Agregar producto\n7.Agregar marca\n8.Agregar categoria\n9.Actualizar Venta \n10.Actualizar producto\n11.Actualizar marca\n12.Actualizar categoria\n13.Eliminar Venta\n14.Generar informe\n15.Salir\nSeleccione una opcion: '))  
+        if num == 1:
+            ver_ventas()
+            continue
+        elif num == 2:
+            ver_productos()
+            continue
+        elif num == 3:
+            ver_marcas()
+            continue
+        elif num == 4:
+            ver_categorias()
+            continue
+        elif num == 5:
+            agregar_venta()
+            continue
+        elif num == 6:
+            agregar_producto()
+            continue
+        elif num == 7:
+            agregar_marca()
+            continue
+        elif num == 8:
+            agregar_categoria()
+            continue
+        elif num == 9:
+            actualizar_venta()
+            continue
+        elif num == 10:
+            actualizar_producto()
+            continue
+        elif num == 11:
+            actualizar_marca()
+            continue
+        elif num == 12:
+            actualizar_categoria()
+            continue
+        elif num == 13:
+            eliminar_venta()
+            continue
+        elif num == 14:
+            generar_informes()
+            continue
+        elif num == 15:
+            break
+menu()
+print("\nSaliendo..\nGracias por usar nuestro sistema.")
