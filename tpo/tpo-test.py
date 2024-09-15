@@ -3,11 +3,6 @@
     2 listas "maestras" de categorias y marcas. Estos dos campos corresponden al índice '''
 
 # Tablas maestras
-print('')
-print("-" * 80)
-print("Bienvenido al sistema de".center(80))
-print("Analisis de venta".center(80))
-print("-" * 80)
 marcas = [
     [1,"Samsung"], 
     [2,"EcoBrand"], 
@@ -77,9 +72,10 @@ ventas = [
 ]
 
 def agregar_categoria():
-    # Verificar si la marca ya existe
+
     nombre_categoria = str(input("Ingrese el nombre de la categoria a agregar: "))
 
+    # Verificar si la categoria ya existe
     existe_categoria = False
     for categoria in categorias:
         if categoria[1] == nombre_categoria:
@@ -94,9 +90,9 @@ def agregar_categoria():
         print(f"Marca '{nombre_categoria}' agregada con ID {nuevo_id}.")
 
 def agregar_marca():
-    # Verificar si la marca ya existe
     nombre_marca = str(input("Ingrese el nombre de la marca a agregar: "))
 
+    # Verificar si la marca ya existe
     existe_marca = False
     for marca in marcas:
         if marca[1] == nombre_marca:
@@ -112,6 +108,7 @@ def agregar_marca():
 
 def agregar_producto():
     # Solicitar datos al usuario
+    print('')
     nombre_producto = input("Ingrese el nombre del producto: ")
 
     # Verificar si el producto ya existe
@@ -136,6 +133,7 @@ def agregar_producto():
 
     if id_marca is None:
         print(f"La marca '{nombre_marca}' no existe. Por favor, añádela primero.")
+        print('')
         return
 
     nombre_categoria = input("Ingrese el nombre de la categoría: ")
@@ -159,6 +157,7 @@ def agregar_producto():
 
 def agregar_venta():
     # Verificar si el ID del producto es válido
+    print('')
     id_producto = int(input("Ingrese el ID del producto a agregar: "))
 
     producto_valido = False
@@ -169,18 +168,23 @@ def agregar_venta():
 
     if not producto_valido:
         print(f"No se puede agregar la venta. El producto con ID {id_producto} no existe.")
+        print('')
         return
+        
 
     cantidad_vendida = int(input("Ingrese la cantidad de unidades vendidas: "))
+    print('')
+    
 
     # Agregar la nueva venta
     nuevo_id = len(ventas) + 1
     nueva_venta = [nuevo_id, id_producto, cantidad_vendida]
     ventas.append(nueva_venta)
     print(f"Venta agregada: ID Venta {nuevo_id}, ID Producto {id_producto}, Cantidad Vendida {cantidad_vendida}.")
+    print('')
 
 def actualizar_categoria():
-
+    print('')
     id_categoria = int(input("Ingrese el ID de la categoria a actualizar: "))
 
     categoria_encontrada = False
@@ -191,9 +195,11 @@ def actualizar_categoria():
             categoria_encontrada = True
             print(f"Categoría con ID {id_categoria} actualizada a '{categoria[1]}'.")
             break
+        print('')
 
     if not categoria_encontrada:
         print(f"No se encontró la categoría con ID {id_categoria}.")
+        print('')
 
 def actualizar_marca():
 
@@ -313,6 +319,7 @@ def actualizar_venta():
 
 def eliminar_venta():
     # Solicitar el ID de la venta a eliminar
+
     id_venta = int(input("Ingresa el ID de la venta a eliminar: "))
 
     # Buscar la venta con el ID especificado
@@ -330,28 +337,44 @@ def eliminar_venta():
 
 def ver_categorias():
     print('')
+    print("-" * 21)
+    print("Categorias".center(21))
+    print("-" * 21)
     if categorias:
         print(f"{'ID':<4}{'Categoría':<25}")
+        print("-" * 21)
         for categoria in categorias:
             print(f"{categoria[0]:<4}{categoria[1]:<25}")
+        print("-" * 21)
     else:
         print("No hay categorías disponibles.")
     print('')
 
 def ver_marcas():
     print('')
+    print("-" * 16)
+    print("Marcas".center(16))
+    print("-" * 16)
     if marcas:
         print(f"{'ID':<4}{'Marca':<25}")
+        print("-" * 16)
         for marca in marcas:
             print(f"{marca[0]:<4}{marca[1]:<25}")
+        print("-" * 16)
     else:
-        print("No hay marcas disponibles.")
+        print("-" * 40)
+        print("--No hay marcas disponibles--")
+        print("-" * 40)
     print('')
 
 def ver_productos():
     print('')
+    print("-" * 91)
+    print("Catalogo de productos".center(91))
+    print("-" * 91)
     if productos:
         print(f"{'ID':<4}{'Producto':<25}{'Precio Unitario':<25}{'Marca':<20}{'Categoría':<20}")
+        print("-" * 91)
         for producto in productos:
             # Encontrar nombre de marca y categoría para mostrar
             marca_nombre = "Desconocida"
@@ -366,25 +389,24 @@ def ver_productos():
                     categoria_nombre = categoria[1]
                     break
 
-            print(f"{producto[0]:<4}{producto[1]:<25}{producto[4]:<25}{marca_nombre:<20}{categoria_nombre:<20}")
+            print(f"{producto[0]:<4}{producto[1]:<25}{producto[4]:<25}{marca_nombre:<20}{categoria_nombre:<20}")       
     else:
         print("No hay productos disponibles.")
+    
+    print("-" * 91)
+    print("")
 
 def ver_ventas():
     if ventas:
         print('')
         print("-" * 105)
-        print(f"{'ID':<5}{'Producto':<20}{'Cantidad':<20}{'Precio Unitario':<20}{'Marca':<20}{'Categoría':<20}")
+        print("Listado de productos detallado".center(105))
+        print("-" * 105)
+        print(f"{'ID':<5}{'Producto':<20}{'Cantidad':<20}{'Precio Unitario':<20}{'Marca':<23}{'Categoría':<20}")
         print("-" * 105)
         for venta in ventas:
-            # Encontrar el producto relacionado con la venta
-            producto_nombre = "Desconocido"
-            precio_unitario = 0
-            marca_nombre = "Desconocida"
-            categoria_nombre = "Desconocida"
-
             for producto in productos:
-                if producto[0] == venta[1]:
+                if producto[0] == venta[1]: #ID producto - ID producto en la venta
                     producto_nombre = producto[1]
                     precio_unitario = producto[4]
 
@@ -400,11 +422,15 @@ def ver_ventas():
                             break
                     break
 
-            print(f"{venta[0]:<5}{producto_nombre:<20}{venta[2]:<20}{precio_unitario:<20}{marca_nombre:<20}{categoria_nombre:<20}")
+            print(f"{venta[0]:<5}{producto_nombre:<20}{venta[2]:<20}{precio_unitario:<20}{marca_nombre:<23}{categoria_nombre:<20}")
+        print("-" * 105)
+        print('')
 
 def generar_informes():
-    # Diccionarios para almacenar resultados
+
+    # Listas para almacenar resultados
     ganancias_por_marca = [0]*len(marcas)
+    ventas_por_marca = [0]*len(marcas)
     ganancias_por_categoria = [0]*len(categorias)
 
     # Calcular las ganancias
@@ -422,6 +448,9 @@ def generar_informes():
                 # Calcular la ganancia
                 ganancia = cantidad_vendida * precio_unitario
 
+                # Calcular ventas por marca
+                ventas_por_marca[id_marca - 1] += cantidad_vendida
+
                 # Acumulando la ganancia por marca
                 ganancias_por_marca[id_marca - 1] += ganancia
 
@@ -438,8 +467,21 @@ def generar_informes():
     print("-" * 40)
 
     for i in range(len(ganancias_por_marca)):
-        print("-",marcas[i][1],end="")
-        print(str(ganancias_por_marca[i]).rjust(38 - len(marcas[i][1]),"."))
+        if ganancias_por_marca[i] != 0:
+            print("-",marcas[i][1],end="") #Nombre de marca
+            print(str(ganancias_por_marca[i]).rjust(37 - len(marcas[i][1]),"."),end="")
+            print("$")
+
+    # Imprimir los resultados
+    print('')
+    print("-" * 40)
+    print("Las marcas y sus ventas".center(40))
+    print("-" * 40)
+
+    for i in range(len(ventas_por_marca)):
+        if ventas_por_marca[i] != 0:
+            print("-",marcas[i][1],end="") # [[id1, NOMBRE1],[id2, NOMBRE2],[id3, NOMBRE3]]
+            print(str(ventas_por_marca[i]).rjust(38 - len(marcas[i][1]),"."))
 
     print("-" * 40)    
     print('')
@@ -450,7 +492,8 @@ def generar_informes():
     for i in range(len(ganancias_por_categoria)):
         total_gan_categ += ganancias_por_categoria[i]
         print("-",categorias[i][1],end="")
-        print(str(ganancias_por_categoria[i]).rjust(38 - len(categorias[i][1]),"."))
+        print(str(ganancias_por_categoria[i]).rjust(37 - len(categorias[i][1]),"."),end="")
+        print("$")
     
     print("-" * 40)
     print('')
@@ -465,54 +508,67 @@ def generar_informes():
         puntos = "*" * int(porcentaje/10)
         print(puntos.rjust(28 - len(categorias[i][1])," "))
     print("-" * 40)
+    print('')
 
 def menu():
-    flag = True
-    while flag !=False:
-        num  = int(input('\n1.Ver Ventas\n2.Ver productos\n3.Ver marca\n4.ver cateogorias\n5.Agregar Venta\n6.Agregar producto\n7.Agregar marca\n8.Agregar categoria\n9.Actualizar Venta \n10.Actualizar producto\n11.Actualizar marca\n12.Actualizar categoria\n13.Eliminar Venta\n14.Generar informe\n15.Salir\nSeleccione una opcion: '))  
+    num = 0
+    while num != 15:
+        num  = int(input("1.Ver ventas\n2.Ver productos\n3.Ver marca\n4.ver categorias\n5.Agregar venta\n6.Agregar producto\n7.Agregar marca"
+                            "\n8.Agregar categoria\n9.Actualizar venta\n10.Actualizar producto\n11.Actualizar marca\n12.Actualizar categoria"
+                            "\n13.Eliminar venta\n14.Generar informe\n15.Salir\n\nSeleccione una opcion: "))
         if num == 1:
             ver_ventas()
-            continue
         elif num == 2:
             ver_productos()
-            continue
         elif num == 3:
             ver_marcas()
-            continue
         elif num == 4:
             ver_categorias()
-            continue
         elif num == 5:
             agregar_venta()
-            continue
         elif num == 6:
             agregar_producto()
-            continue
         elif num == 7:
             agregar_marca()
-            continue
         elif num == 8:
             agregar_categoria()
-            continue
         elif num == 9:
             actualizar_venta()
-            continue
         elif num == 10:
             actualizar_producto()
-            continue
         elif num == 11:
             actualizar_marca()
-            continue
         elif num == 12:
             actualizar_categoria()
-            continue
         elif num == 13:
             eliminar_venta()
-            continue
         elif num == 14:
             generar_informes()
-            continue
-        elif num == 15:
-            break
+        else:
+            print('')
+            print("-" * 80)
+            print("--ERROR--".center(80))
+            print("Vuelva a ingresar un número dentro del rango o 15 para salir".center(80))
+            print("-" * 80)
+            print('')
+        
+print('')
+print("-" * 80)
+print(("Bienvenido al sistema de analisis de venta").center(80))
+print("-" * 80)
+
 menu()
-print("\nSaliendo..\nGracias por usar nuestro sistema.")
+
+print('')
+print("-" * 80)
+print("Saliendo...".center(80))
+print("Gracias por usar nuestro sistema.".center(80))
+print("-" * 80)
+print('')
+
+
+
+
+
+
+
