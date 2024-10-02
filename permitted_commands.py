@@ -179,6 +179,15 @@ for j in range(int(porcentaje/10)):
 print("*", end="")
 print( )
 
+##Clase 7 Tuplas
+
+#Usamos tuples para valores que no se busca que cambien
+
+#Conjuntos
+
+#No se les pueden agregar datos MUTABLES
+
+
 
 
 

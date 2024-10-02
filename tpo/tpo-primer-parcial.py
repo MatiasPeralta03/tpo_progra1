@@ -1,6 +1,18 @@
-''' En este programa se busca analizar las ventas totales de productos de un distribuidor de tecnología. 
-    Para esto se generó una matriz con los 100 productos comercializados en el mes. También generamos 
-    2 listas "maestras" de categorias y marcas. Estos dos campos corresponden al índice '''
+''' Plataforma de Análisis de Datos de Ventas
+    Desarrollar una plataforma que lea datos de ventas desde archivos CSV y JSON.
+    Utilizar matrices para representar datos de ventas, listas avanzadas y diccionarios
+    para análisis y reportes. Implementar manejo de excepciones y recursividad para
+    cálculos avanzados. Controlar el proyecto con Git y realizar pruebas unitarias para
+    asegurar la calidad.
+'''
+
+''' En este programa se busca analizar las ventas totales de productos de un distribuidor 
+    de insumos. Utilizaremos 4 matrices que seran marcas, categorias, productos y ventas.
+    Existen dependecias entre las 4 matrices por lo que el programa permitira modificar
+    valores de las mismas dependiendo la relacion existente de la matriz con otra.
+    Finalmente podremos imprimir informes con algunas analiticas generales de las ventas
+    y ganancias derivadas de ellas.
+'''
 
 # Tablas maestras
 marcas = [
@@ -512,7 +524,8 @@ def generar_informes():
 
 def menu():
     num = 0
-    while num != 15:
+    flag = False
+    while not flag:
         num  = int(input("1.Ver ventas\n2.Ver productos\n3.Ver marca\n4.ver categorias\n5.Agregar venta\n6.Agregar producto\n7.Agregar marca"
                             "\n8.Agregar categoria\n9.Actualizar venta\n10.Actualizar producto\n11.Actualizar marca\n12.Actualizar categoria"
                             "\n13.Eliminar venta\n14.Generar informe\n15.Salir\n\nSeleccione una opcion: "))
@@ -544,6 +557,8 @@ def menu():
             eliminar_venta()
         elif num == 14:
             generar_informes()
+        elif num == 15:
+            flag = True
         else:
             print('')
             print("-" * 80)
@@ -565,10 +580,3 @@ print("Saliendo...".center(80))
 print("Gracias por usar nuestro sistema.".center(80))
 print("-" * 80)
 print('')
-
-
-
-
-
-
-
