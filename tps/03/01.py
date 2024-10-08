@@ -105,13 +105,9 @@ def transponer_matriz(matriz):
         for j in range(i + 1, len(matriz)):
             matriz[i][j], matriz[j][i] = matriz[j][i], matriz[i][j]
 
-print("Matriz original:")
-for fila in matriz:
-    print(fila)
-
 transponer_matriz(matriz)
 
-print("\nMatriz transpuesta:")
+print("Matriz transpuesta:")
 for fila in matriz:
     print(fila)
 
@@ -146,3 +142,48 @@ def promedio_columna_impar_en_matriz(matriz, columna):
     return prom / len(matriz[i])
 
 print(f"El promedio de la columna {num} es de {promedio_columna_impar_en_matriz(matriz, num)}.")
+
+#h. Determinar si la matriz es simétrica con respecto a su diagonal principal.
+
+matriz = [[1, 2, 3], [2, 1, 3], [3, 3, 1]]
+
+t_matriz = transponer_matriz(matriz)
+
+def detectar_simetria_principal(mtx_t, mtx):
+    flag = True
+    i = 0 
+    while i < (len(mtx)) and flag:
+        j = 0
+        while j < (len(mtx)) and flag:
+            if mtx[i][j] != mtx_t[i][j]:
+                flag = False
+            print(mtx_t[i][j])
+            j += 1
+        i += 1
+    return flag
+
+if detectar_simetria_principal(t_matriz, matriz):
+    print("Simetrica con respecto a su diagonal principal.")
+else:
+    print("No son simetrica con respecto a su diagonal principal.")
+
+#i. Determinar si la matriz es simétrica con respecto a su diagonal secundaria.
+
+def detectar_simetria_secundaria(mtx):
+    n = len(mtx)
+    i = 0
+    flag = True  # Suponemos que la matriz es simétrica inicialmente
+    
+    while i < n and flag:  # Iterar por las filas mientras flag sea True
+        j = 0
+        while j < n and flag:  # Iterar por las columnas
+            if mtx[i][j] != mtx[n-1-j][n-1-i]:  # Comprobar la simetría respecto a la diagonal secundaria
+                flag = False  # Si no son iguales, la matriz no es simétrica
+            j += 1
+        i += 1
+    return flag
+
+if detectar_simetria_secundaria(matriz):
+    print("Simetrica con respecto a su diagonal principal.")
+else:
+    print("No son simetrica con respecto a su diagonal principal.")
