@@ -52,10 +52,15 @@ cont = 0
 lst_prod = []
 for i in range(len(matriz)):
     for j in range(6):
-        cont += matriz[j][i]
+        cont += matriz[i][j]
     lst_prod.append(cont)
     cont = 0
 
 print(f"El dia mas productivo fue el {lst_prod.index(max(lst_prod)) + 1} con una cantidad de {max(lst_prod)} bicicletas fabricadas.")   
     
+# e. Lista por comprensión con la menor cantidad fabricada por cada fábrica
+menores_por_fabrica = [min(fabrica) for fabrica in matriz]
 
+print("Menor cantidad fabricada por cada fábrica:")
+for i, menor in enumerate(menores_por_fabrica):
+    print(f"Fábrica {i + 1}: {menor} unidades")
