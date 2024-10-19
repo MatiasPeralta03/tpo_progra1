@@ -55,7 +55,7 @@ print('')
 print("-" * 80)
 print(("Bienvenido al sistema de analisis de ventas").center(80))
 print("-" * 80)
-print('')
+print('') 
 
 menu()
 
