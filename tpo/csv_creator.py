@@ -4,26 +4,26 @@ from datetime import datetime, timedelta
 
 # List of market products with their specific prices
 product_prices = {
-    "Producto A": 100.0,
-    "Producto B": 150.0,
-    "Producto C": 200.0,
-    "Producto D": 50.0,
-    "Producto E": 75.0,
-    "Producto F": 120.0,
-    "Producto G": 90.0,
-    "Producto H": 300.0,
-    "Producto I": 250.0,
-    "Producto J": 180.0,
-    "Producto K": 60.0,
-    "Producto L": 45.0,
-    "Producto M": 220.0,
-    "Producto N": 140.0,
-    "Producto O": 130.0,
-    "Producto P": 110.0,
-    "Producto Q": 95.0,
-    "Producto R": 80.0,
-    "Producto S": 160.0,
-    "Producto T": 170.0
+    "Producto A": 10000,
+    "Producto B": 15000,
+    "Producto C": 20000,
+    "Producto D": 5000,
+    "Producto E": 7500,
+    "Producto F": 12000,
+    "Producto G": 9000,
+    "Producto H": 30000,
+    "Producto I": 25000,
+    "Producto J": 18000,
+    "Producto K": 6000,
+    "Producto L": 4500,
+    "Producto M": 22000,
+    "Producto N": 14000,
+    "Producto O": 13000,
+    "Producto P": 11000,
+    "Producto Q": 9500,
+    "Producto R": 8000,
+    "Producto S": 16000,
+    "Producto T": 17000
 }
 
 # Function to generate random dates
@@ -35,11 +35,11 @@ data = []
 start_date = datetime(2023, 1, 1)
 end_date = datetime(2023, 12, 31)
 
-for i in range(10):  # Adjust the range as needed for more rows
+for i in range(1000000):  # Adjust the range as needed for more rows
     date = random_date(start_date, end_date).strftime("%d/%m/%Y")
     product = random.choice(list(product_prices.keys()))  # Randomly select from predefined products
     quantity = random.randint(1, 20)
-    yes_no = random.choice(["Sí", "No"])
+    yes_no = random.choice(["Y", "N"])
     
     # Get the specific price for the selected product
     price_per_unit = product_prices[product]
@@ -53,7 +53,7 @@ for i in range(10):  # Adjust the range as needed for more rows
     data.append([i + 1, date, product, quantity, yes_no, total_price, payment_method])
 
 # Create a DataFrame and save to CSV
-df = pd.DataFrame(data, columns=["ID", "Fecha", "Producto", "Cantidad", "Sí/No", "Precio", "Método de Pago"])
-df.to_csv("generated_data_top.csv", index=False)
+df = pd.DataFrame(data, columns=["id", "fecha", "producto", "cantidad", "cliente", "precio", "metodo_de_pago"])
+df.to_csv("ventas.csv", index=False, sep=';')
 
-print("CSV file 'generated_data_top.csv' has been created.")
+print("CSV file 'ventas.csv' has been created.")
