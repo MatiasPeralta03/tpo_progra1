@@ -17,7 +17,7 @@ def doc_to_matrix(doc_name):
 
 def mtx_empty_spaces(mtx):
     for lst in mtx:
-        if not lst:
+        if not lst: # [[],[],[]]
             mtx.remove(lst)
     return mtx
 
@@ -40,6 +40,7 @@ def mtx_id_restructure(mtx):
         mtx[i][0] = i + 1
     return mtx
 
+"""Checkea """
 def mtx_id_check(mtx):
     i = 0
     estructured = True
