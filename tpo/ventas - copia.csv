@@ -1,0 +1,20 @@
+id;fecha;producto;cantidad;cliente;monto;medio_de_pago
+1;21/02/2023;Producto H;13;Y;390000;Efectivo
+2;26/03/2023;Producto O;13;N;169000;Tarjeta
+3;09/01/2023;Producto I;4;N;100000;Transferencia
+4;28/11/2023;Producto S;12;Y;192000;Tarjeta
+5;24/04/2023;Producto N;17;N;238000;Tarjeta
+6;20/02/2023;Producto P;7;Y;77000;Efectivo
+7;03/05/2023;Producto P;15;N;165000;Transferencia
+8;21/08/2023;Producto L;18;N;81000;Tarjeta
+9;14/06/2023;Producto O;1;Y;13000;Transferencia
+10;19/10/2023;Producto H;14;Y;420000;Transferencia
+11;18/06/2023;Producto L;14;N;63000;Transferencia
+12;23/10/2023;Producto R;3;Y;24000;Transferencia
+13;05/02/2023;Producto Q;11;Y;104500;Transferencia
+14;16/03/2023;Producto F;12;N;144000;Tarjeta
+15;24/05/2023;Producto T;1;N;17000;Tarjeta
+16;15/12/2023;Producto O;1;Y;13000;Tarjeta
+17;01/10/2023;Producto F;4;N;48000;Efectivo
+18;23/01/2023;Producto N;14;N;196000;Transferencia
+19;24/04/2023;Producto K;1;Y;6000;Efectivo
