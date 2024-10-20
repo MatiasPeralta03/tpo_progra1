@@ -1,3 +1,47 @@
+def read_csv_discounts(file_path):
+    try:
+        with open(file_path, "rt") as arch:
+            # Read and discard the header line
+            arch.readline()
+            
+            for linea in arch:
+                descuento_cliente = 1
+                porcentaje_pago = 1
+                id, fecha, producto, cantidad, cliente, monto, medio_de_pago = linea.strip().split(';')
+                monto = int(monto)
+                
+                # Descuento por cliente recurrente
+                if cliente == "Y":
+                    descuento_cliente -= 0.10  # 10% de descuento si es cliente recurrente
+                
+                # Ajuste por método de pago
+                if medio_de_pago == "Efectivo":
+                    porcentaje_pago -= 0.05  # 5% de descuento si paga en efectivo
+                elif medio_de_pago == "Transferencia":
+                    porcentaje_pago -= 0.05  # 5% de descuento si paga por transferencia
+                elif medio_de_pago == "Tarjeta":
+                    porcentaje_pago += 0.10  # 10% de aumento si paga con tarjeta
+                
+                # Calcular el monto final aplicando primero el descuento por cliente y luego el ajuste por método de pago
+                monto_final = monto * ((descuento_cliente + porcentaje_pago) - 1)
+                
+                # Mostrar información del cliente y su monto ajustado
+                print(f"Cliente: {'Recurrente' if cliente == 'Y' else 'Nuevo'}, "
+                      f"Método de pago: {medio_de_pago}, "
+                      f"Monto original: {monto:.2f}$, "
+                      f"Monto ajustado: {monto_final:.2f}$ "
+                      f"(Descuento por cliente: {(descuento_cliente-1)*100:.2f}%, "
+                      f"Ajuste por pago: {(porcentaje_pago-1)*100:.2f}%)")
+
+        print("Análisis de descuentos y aumentos completado.")
+    except FileNotFoundError as mensaje:
+        print("No se puede abrir el archivo:", mensaje)
+    except OSError as mensaje:
+        print("No se puede leer el archivo:", mensaje)
+    except ValueError as mensaje:
+        print("Error en el formato del archivo:", mensaje)
+
+
 def read_csv(file_path):
     try:
         arch = open(file_path, "rt")
@@ -10,34 +54,10 @@ def read_csv(file_path):
         productos_con_monto = {}
         linea = arch.readline()
         while linea:
-            descuento_cliente = 1
-            porcentaje_pago = 1
             id, fecha, producto, cantidad, cliente, monto, medio_de_pago = linea.split(';')
-            medio_de_pago = medio_de_pago.rstrip('\n')
-            monto = int(monto)
+        
             if producto not in productos_con_monto.keys():
                 productos_con_monto[producto] = 0
-            
-            # Descuento por cliente recurrente
-            if cliente == "Y":
-                descuento_cliente -= 0.10  # 10% de descuento si es cliente recurrente
-            
-            # Ajuste por método de pago
-            if medio_de_pago == "Efectivo":
-                porcentaje_pago -= 0.05  # 5% de descuento si paga en efectivo
-            elif medio_de_pago == "Transferencia":
-                porcentaje_pago -= 0.05  # 5% de descuento si paga por transferencia
-            elif medio_de_pago == "Tarjeta":
-                porcentaje_pago += 0.10  # 10% de aumento si paga con tarjeta
-            
-            
-            # Calcular el monto final aplicando primero el descuento por cliente y luego el ajuste por método de pago
-            monto_final = monto * ((descuento_cliente + porcentaje_pago)-1)
-            
-            # Mostrar información del cliente y su monto ajustado
-            print(f"Cliente: {cliente}, Producto: {producto}, Monto original: {monto:.2f}$, Monto ajustado: {monto_final:.2f}$ (Descuento por cliente: {descuento_cliente*100-100:.2f}%, Ajuste por pago: {porcentaje_pago*100-100:.2f}%)")
-            
-            
             productos_con_monto[producto] += int(monto)
             medio_de_pago = medio_de_pago.rstrip('\n')
             linea = arch.readline()
@@ -67,17 +87,28 @@ file = "tpo/ventas - copia.csv" #tpo/ventas.csv
 def menu():
     flag = False
     while not flag:
-        num = int(input("1.Ver informes\n2.Salir\n\nSeleccione una opcion: "))
+        num = int(input("1. Ver informes\n2. Salir\n\nSeleccione una opción: "))
         if num == 1:
-            print(f"Monto por producto")
-            read_csv(file)
+            while True:
+                print("\nSubmenu de Analíticas:")
+                valor = int(input("1. Analítica de Monto por Producto\n2. Analítica de Descuentos/Aumentos\n3. Volver al menú principal\n\nSeleccione una opción: "))
+                if valor == 1:
+                    print("\nMonto por producto:")
+                    read_csv(file)
+                elif valor == 2:
+                    print("\nDescuentos/Aumentos por medio de pago y tipo de cliente:")
+                    read_csv_discounts(file)  # Esta función aún no está definida
+                elif valor == 3:
+                    break
+                else:
+                    print('\nOpción no válida. Por favor, intente de nuevo.')
         elif num == 2:
             flag = True
         else:
             print('')
             print("-" * 80)
             print("--ERROR--".center(80))
-            print("Vuelva a ingresar un número dentro del rango o 15 para salir".center(80))
+            print("Vuelva a ingresar un número dentro del rango o 2 para salir".center(80))
             print("-" * 80)
             print('')
         
